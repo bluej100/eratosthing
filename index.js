@@ -1,13 +1,15 @@
-"use strict";
+'use strict';
 
-const PriorityQueue = require("js-priority-queue");
+const PriorityQueue = require('js-priority-queue');
 
 module.exports = function*() {
-  let composites = new PriorityQueue({ comparator: function(a, b) { return a.value - b.value } });
+  let composites = new PriorityQueue({
+    comparator: function(a, b) { return a.value - b.value; }
+  });
   let value = 2;
   while (true) {
     let prime = true;
-    while (composites.length && composites.peek().value == value) {
+    while (composites.length && composites.peek().value === value) {
       prime = false;
       let next = composites.dequeue();
       next.value += next.factor;
