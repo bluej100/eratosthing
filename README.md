@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bluej100/eratosthing.svg?branch=master)](https://travis-ci.org/bluej100/eratosthing)
+
 Installation
 ------------
 
