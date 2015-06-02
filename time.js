@@ -1,7 +1,7 @@
 'use strict';
 
 const eratosthing = require('./index');
-const iterations = 100000;
+const iterations = 100 * 1000;
 
 let generator = eratosthing();
 let start = Date.now();
