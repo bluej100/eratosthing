@@ -1,6 +1,6 @@
 {
   "name": "eratosthing",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "eratosthenes generator",
   "main": "index.js",
   "scripts": {

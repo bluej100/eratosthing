@@ -20,6 +20,10 @@
       2,
       "always"
     ],
+    "comma-dangle": [
+      2,
+      "always-multiline",
+    ],
     "no-constant-condition": 0
   },
   "globals": {
