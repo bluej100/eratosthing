@@ -13,14 +13,18 @@ function scanComposites(composites, value) {
   return composite;
 }
 
-module.exports = function*() {
+module.exports = function*(max) {
+  let factorCap = max ? Math.sqrt(max) : undefined;
   let comparator = function(a, b) { return a.value - b.value; };
   let composites = new PriorityQueue({comparator: comparator});
+
   yield 2;
-  for (let value = 3; true; value += 2) {
-    if (!scanComposites(composites, value)) {
-      yield value;
-      composites.queue({ value: value * 3, delta: value * 2 });
-    }
+  let value;
+  for (value = 3; true; value += 2) {
+    if (max && value > max) { break; }
+    if (scanComposites(composites, value)) { continue; }
+    yield value;
+    if (factorCap && value > factorCap) { continue; }
+    composites.queue({ value: value * 3, delta: value * 2 });
   }
 };

@@ -3,13 +3,26 @@
 const eratosthing = require('./index');
 const assert = require('assert');
 
+const firstPrimes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37];
+
 (function testFirstPrimes() {
-  const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37];
   let generator = eratosthing();
 
-  primes.forEach(function(prime) {
-    assert.equal(generator.next().value, prime, 'first primes correct');
+  firstPrimes.forEach(function(prime) {
+    let value = generator.next().value;
+    assert.equal(value, prime, 'first primes correct');
   });
+})();
+
+(function testMax() {
+  let generator = eratosthing(37);
+  let primes = [];
+
+  for (var prime of generator) {
+    primes.push(prime);
+  }
+
+  assert.deepEqual(primes, firstPrimes, 'first primes correct via max');
 })();
 
 (function testLargePrime() {
