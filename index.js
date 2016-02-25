@@ -25,6 +25,6 @@ module.exports = function*(max) {
     if (scanComposites(composites, value)) { continue; }
     yield value;
     if (factorCap && value > factorCap) { continue; }
-    composites.queue({ value: value * 3, delta: value * 2 });
+    composites.queue({ value: value * value, delta: value * 2 });
   }
 };
