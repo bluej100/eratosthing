@@ -1,22 +1,22 @@
 'use strict';
 
-const PriorityQueue = require('js-priority-queue');
-
 function scanComposites(composites, value) {
-  let composite = false;
-  while (composites.length && composites.peek().value === value) {
-    composite = true;
-    let next = composites.dequeue();
-    next.value += next.delta;
-    composites.queue(next);
+  let values = composites[value];
+  if (!values) { return false; }
+  for (let i = 0; i < values.length; i++) {
+    let delta = values[i];
+    let key = value + delta;
+    if (!composites[key]) { composites[key] = []; }
+    composites[key].push(delta);
   }
-  return composite;
+  delete composites[value];
+  return true;
 }
 
 module.exports = function*(max) {
   let factorCap = max ? Math.sqrt(max) : undefined;
   let comparator = function(a, b) { return a.value - b.value; };
-  let composites = new PriorityQueue({comparator: comparator});
+  let composites = {};
 
   yield 2;
   let value;
@@ -25,6 +25,8 @@ module.exports = function*(max) {
     if (scanComposites(composites, value)) { continue; }
     yield value;
     if (factorCap && value > factorCap) { continue; }
-    composites.queue({ value: value * value, delta: value * 2 });
+    let key = value * value;
+    if (!composites[key]) { composites[key] = []; }
+    composites[key].push(value * 2);
   }
 };
