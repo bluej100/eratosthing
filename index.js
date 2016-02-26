@@ -15,7 +15,6 @@ function scanComposites(composites, value) {
 
 module.exports = function*(max) {
   let factorCap = max ? Math.sqrt(max) : undefined;
-  let comparator = function(a, b) { return a.value - b.value; };
   let composites = {};
 
   yield 2;
